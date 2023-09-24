@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create File</title>
+    <link rel="stylesheet" href="{% static 'file_manager.css' %}">
+</head>
+<body>
+    <h1>Create File</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="name">File Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="parent_folder">Select Folder:</label>
+        <select id="parent_folder" name="parent_folder">
+            <option value="">None</option>
+            {% for folder in folders %}
+                <option value="{{ folder.id }}">{{ folder.name }}</option>
+            {% endfor %}
+        </select>
+        <label for="file">Upload File:</label>
+        <input type="file" id="file" name="file" required>
+        <button type="submit">Upload File</button>
+    </form>
+    <hr>
+    <a type="submit" href="{% url 'create_folder' %}" class="btn btn-primary">Create Folder</a>
+    <a type="button" href="{% url 'file_list' %}" class="btn btn-success">File List</a>
+</body>
+</html>
+{%endblock%}

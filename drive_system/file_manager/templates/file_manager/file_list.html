@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Manager</title>
+</head>
+<body>
+    <h1>File Manager</h1>
+    <hr>
+
+    <h2>Folders</h2>
+    <ul>
+        {% for folder in folders %}
+            <li>{{ folder.name }} <a href="{% url 'delete_folder' folder.id %}">Delete</a> <hr></li>
+        {% endfor %}
+    </ul>
+
+    <!-- Display Files -->
+    <h2>Files</h2>
+    <ul>
+        {% for file in files %}
+            <li>{{ file.name }}  <a href="{% url 'delete_file' file.id %}">Delete</a></li><hr>
+        {% endfor %}
+    </ul>
+    <hr>
+    <a href="{% url 'create_folder' %}" class="btn btn-primary">Create Folder</a>
+    <a href="{% url 'create_file' %}" class="btn btn-success">Create File</a>
+
+</body>
+</html>
+{% endblock %}

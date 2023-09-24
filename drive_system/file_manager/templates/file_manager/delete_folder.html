@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Delete Folder</h2>
+<p>Are you sure you want to delete the folder "{{ folder.name }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Delete</button>
+</form>
+<a href="{% url 'file_list' %}">Cancel</a>
+{% endblock %}
